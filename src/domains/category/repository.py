@@ -5,8 +5,8 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.core.exceptions import CategoryAlreadyExistsError, CategoryNotFoundError
-from src.database.models import Category
-from src.schemas.category import CategoryCreate, CategoryResponse, CategoryUpdate
+from src.domains.category.model import Category
+from src.domains.category.schema import CategoryCreate, CategoryResponse, CategoryUpdate
 
 
 class CategoryRepository:

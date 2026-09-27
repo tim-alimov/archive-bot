@@ -14,3 +14,7 @@ wheels/
 !.env.example
 
 .ruff_cache
+
+*.db
+*.sqlite
+*.sqlite3
