@@ -1,22 +1,19 @@
 import asyncio
-import sys
 from logging.config import fileConfig
-from pathlib import Path
 
+from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from alembic import context
-from src.core.settings import settings
-
-# Add project root/src to Python path if necessary
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-
-# Import your Base and models metadata
+import src.domain.models  # noqa: F401  (registers models on Base.metadata)
 from src.core.database import Base
+from src.core.settings import Settings
 
 config = context.config
-config.set_main_option("sqlalchemy.url", settings.database_url.get_secret_value())
+config.set_main_option(
+    "sqlalchemy.url",
+    Settings().database_url.get_secret_value(),  # pyright: ignore[reportCallIssue]
+)
 
 if config.config_file_name:
     fileConfig(config.config_file_name)
@@ -32,6 +29,7 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        render_as_batch=True,
     )
 
     with context.begin_transaction():
@@ -40,7 +38,11 @@ def run_migrations_offline() -> None:
 
 def do_run_migrations(connection):
     """Execute migrations inside a synchronous wrapper context."""
-    context.configure(connection=connection, target_metadata=target_metadata)
+    context.configure(
+        connection=connection,
+        target_metadata=target_metadata,
+        render_as_batch=True,
+    )
 
     with context.begin_transaction():
         context.run_migrations()

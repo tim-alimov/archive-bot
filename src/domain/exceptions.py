@@ -17,12 +17,20 @@ class CategoryNotFoundError(CategoryError):
             super().__init__("Category not found.")
 
 
+class InvalidCategoryError(CategoryError):
+    pass
+
+
 class CategoryAlreadyExistsError(CategoryError):
     def __init__(self, title: str | None) -> None:
         super().__init__(f"Category with title '{title}' already exists.")
 
 
 class ArchiveError(Exception):
+    pass
+
+
+class InvalidArchiveError(ArchiveError):
     pass
 
 

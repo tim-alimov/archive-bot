@@ -18,6 +18,3 @@ class Settings(BaseSettings):
         case_sensitive=False,
         env_file_encoding="utf-8",
     )
-
-
-settings = Settings()  # pyright: ignore[reportCallIssue]
