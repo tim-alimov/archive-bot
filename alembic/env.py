@@ -13,7 +13,7 @@ from src.core.settings import settings
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 # Import your Base and models metadata
-from src.database.models import Base
+from src.core.database import Base
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.database_url.get_secret_value())
