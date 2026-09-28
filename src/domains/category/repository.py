@@ -35,7 +35,6 @@ class CategoryRepository:
         db_categories = result.scalars().all()
         return [CategoryResponse.model_validate(c) for c in db_categories]
 
-
     async def create(self, category: CategoryCreate) -> CategoryResponse:
         db_category = Category(**category.model_dump())
         self._session.add(db_category)

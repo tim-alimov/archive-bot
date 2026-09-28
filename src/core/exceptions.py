@@ -6,7 +6,9 @@ class CategoryError(Exception):
 
 
 class CategoryNotFoundError(CategoryError):
-    def __init__(self, category_id: UUID | None = None, title: str | None = None) -> None:
+    def __init__(
+        self, category_id: UUID | None = None, title: str | None = None
+    ) -> None:
         if category_id:
             super().__init__(f"Category with ID '{category_id}' was not found.")
         elif title:
@@ -25,7 +27,9 @@ class ArchiveError(Exception):
 
 
 class ArchiveNotFoundError(ArchiveError):
-    def __init__(self, archive_id: UUID | None = None, title: str | None = None) -> None:
+    def __init__(
+        self, archive_id: UUID | None = None, title: str | None = None
+    ) -> None:
         if archive_id:
             super().__init__(f"Archive with ID '{archive_id}' was not found.")
         elif title:

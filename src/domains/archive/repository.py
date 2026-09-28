@@ -26,7 +26,6 @@ class ArchiveRepository:
         db_archives = result.scalars().all()
         return [ArchiveResponse.model_validate(a) for a in db_archives]
 
-
     async def create(self, archive: ArchiveCreate) -> ArchiveResponse:
         db_archive = Archive(**archive.model_dump())
         self._session.add(db_archive)

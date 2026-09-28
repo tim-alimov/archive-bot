@@ -12,6 +12,7 @@ from src.core.settings import settings
 class Base(DeclarativeBase):
     pass
 
+
 engine: AsyncEngine = create_async_engine(
     settings.database_url.get_secret_value(),
 )
